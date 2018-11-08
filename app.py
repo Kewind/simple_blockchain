@@ -7,9 +7,7 @@ from urllib.parse import urlparse
 
 def runServer(server_port, server_url='0.0.0.0'):
     node_address = str(uuid4()).replace('-', '')
-
     app = Flask(__name__)
-
     blockchain = Blockchain()
 
     @app.route(Config.MINE_BLOCK_URL, methods=['GET'])

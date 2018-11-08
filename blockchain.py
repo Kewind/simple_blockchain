@@ -6,17 +6,17 @@ from urllib.parse import urlparse
 
 class Block:
 
-    def __init__(self, index, proof, previous_hash, transactions):
+    def __init__(self, index, proof, previous_hash, Transaction):
         self.index = index
         self.timestamp = str(datetime.datetime.now())
         self.proof = proof
         self.previous_hash = previous_hash
-        self.transactions = transactions
+        self.Transaction = Transaction
 
     def __repr__(self):
         return "Block #{}, timestamp = {}, proof = {}, previous_hash = {}".format(self.index, self.timestamp,\
                                                                                 self.proof, self.previous_hash)
-class Transactions:
+class Transaction:
 
     def __init__(self, sender, receiver, amount):
         self.sender = sender
@@ -27,14 +27,14 @@ class Blockchain:
 
     def __init__(self):
         self.chain = []
-        self.transactions = []
+        self.Transaction = []
         self.create_block(proof=1, previous_hash='0')
         self.target_leading_zeros = Config.INIT_TARGET_LEADING_ZEROS
         self.nodes = set()
 
     def create_block(self, proof, previous_hash):
-        new_block = Block(len(self.chain) + 1, proof, previous_hash, self.transactions)
-        self.transactions = []
+        new_block = Block(len(self.chain) + 1, proof, previous_hash, self.Transaction)
+        self.Transaction = []
         self.chain.append(new_block)
         return new_block
 
@@ -76,7 +76,7 @@ class Blockchain:
 
     def add_transaction(self, sender, receiver, amount):
         new_transaction = Transaction(sender, receiver, amount)
-        self.transactions.append(new_transaction)
+        self.Transaction.append(new_transaction)
         prev_block = self.get_previous_block()
         return prev_block.index + 1
 

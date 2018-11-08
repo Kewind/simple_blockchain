@@ -1,4 +1,4 @@
-class Config():
+class Config:
     SERVER_URL = '127.0.0.1'
     MINE_BLOCK_URL = '/mine_block'
     GET_CHAIN_URL = '/get_chain'
